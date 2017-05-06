@@ -1,29 +1,40 @@
 package com.advancedCal.java;
 
+import com.advancedCal.java.utilities.MathHelper;
+
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        String s1 = askForInput("Enter a numeric value: ");
-        String s2 = askForInput("Enter a numeric value: ");
-        String choice = askForInput("Choose an operation (+ - * /)");
+
+        Main calc = new Main();
+        calc.calculate();
+    }
+
+    protected void calculate() {
+
+        InputHelper helper = new InputHelper();
+        String s1 = helper.askForInput("Enter a numeric value: ");
+        String s2 = helper.askForInput("Enter a numeric value: ");
+        String choice = helper.askForInput("Choose an operation (+ - * /)");
+
 
         double result = 0;
 
         try {
             switch (choice) {
                 case "+":
-                    result = addValues(s1, s2);
+                    result = MathHelper.addValues(s1, s2);
                     break;
                 case "-":
-                    result = subtractValues(s1, s2);
+                    result = MathHelper.subtractValues(s1, s2);
                     break;
                 case "*":
-                    result = multiplyValues(s1, s2);
+                    result = MathHelper.multiplyValues(s1, s2);
                     break;
                 case "/":
-                    result = divideValues(s1, s2);
+                    result = MathHelper.divideValues(s1, s2);
                     break;
                 default:
                     System.out.println("Unrecognised operation!");
@@ -37,33 +48,12 @@ public class Main {
         }
     }
 
-    private static String askForInput(String prompt) {
-        System.out.println(prompt);
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-    }
+    class InputHelper {
 
-    private static double addValues(String s1, String s2) {
-        double d1 = Double.parseDouble(s1);
-        double d2 = Double.parseDouble(s2);
-        return d1 + d2;
-    }
-
-    private static double subtractValues(String s1, String s2) {
-        double d1 = Double.parseDouble(s1);
-        double d2 = Double.parseDouble(s2);
-        return d1 - d2;
-    }
-
-    private static double multiplyValues(String s1, String s2) {
-        double d1 = Double.parseDouble(s1);
-        double d2 = Double.parseDouble(s2);
-        return d1 * d2;
-    }
-
-    private static double divideValues(String s1, String s2) {
-        double d1 = Double.parseDouble(s1);
-        double d2 = Double.parseDouble(s2);
-        return d1 / d2;
+        private String askForInput(String prompt) {
+            System.out.println(prompt);
+            Scanner sc = new Scanner(System.in);
+            return sc.nextLine();
+        }
     }
 }
